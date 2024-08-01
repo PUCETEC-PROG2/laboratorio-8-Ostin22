@@ -2,9 +2,8 @@
 
 {% block title %}Mi Pokedex{% endblock title %}
 {% block content %}
-    <p class="p-2">Hola, este es tu primer sitio en Django</p>
+    <p class="p-2">Aquí podrás ver tus Pokemones</p>
     <!-- Con este enlace redirigimos a nuestro formulario de agregar pokemones -->
-    <a href="{% url "pokedex:add_pokemon" %}" class="btn btn-primary">Crear pokemon</a>
     <div class="card-group">
         {%for pokemon in pokemons%}
             <div class="card">
@@ -31,6 +30,8 @@
             </div>
         {%endfor%}
     </div>
+    <a href="{% url "pokedex:add_pokemon" %}" class="btn btn-primary">Crear pokemon</a>
+
 
 
 {% endblock content %}

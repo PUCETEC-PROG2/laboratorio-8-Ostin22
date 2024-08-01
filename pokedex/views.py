@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import Pokemon
-from pokedex.forms import PokemonForm
+from .models import Pokemon, Trainer
+from pokedex.forms import PokemonForm, TrainerForm
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -67,3 +67,50 @@ def delete_pokemon(request, id):
     pokemon = get_object_or_404(Pokemon, pk = id)
     pokemon.delete()
     return redirect("pokedex:index")
+
+
+#views para agregar entrenadores
+
+def trainer(request, trainer_id):
+    trainer = Trainer.objects.get(pk = trainer_id)
+    template = loader.get_template('display_trainer.html')
+    context = {
+        'trainer': trainer
+    }
+    return HttpResponse(template.render(context, request))
+    
+
+def trainer_list(request):
+    trainers = Trainer.objects.all()
+    return render (request, 'trainer_list.html', {'trainers': trainers})
+
+@login_required
+def add_trainer(request):
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pokedex:trainer_list')
+    else:
+        form = TrainerForm()
+    return render(request, 'trainer_form.html', {'form' : form})
+
+@login_required
+def edit_trainer(request, id):
+    trainer = get_object_or_404(Trainer, pk = id)
+    if request.method == 'POST':
+        # el parametro instance = trainer indica que el formulario debe estar pre-cargado con los datos del objeto "trainer"
+        form = TrainerForm(request.POST, request.FILES, instance = trainer)
+        if form.is_valid():
+            form.save()
+            return redirect('pokedex:trainer_list')
+    else:
+        form = TrainerForm(instance = trainer)
+    return render(request, 'trainer_form.html', {'form': form})        
+@login_required
+
+def delete_trainer(request, id):
+    trainer = get_object_or_404(Trainer, pk = id)
+    trainer.delete()
+    return redirect ('pokedex:trainer_list')
+        

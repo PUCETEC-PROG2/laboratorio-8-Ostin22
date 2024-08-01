@@ -12,7 +12,8 @@ class Trainer(models.Model):
     last_name = models.CharField(max_length=30, null=False)
     birth_date = models.DateField(null=False)
     level = models.IntegerField(default=1)
-    
+    picture = models.ImageField(upload_to='pokemon_images')
+
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
 
@@ -21,12 +22,12 @@ class Trainer(models.Model):
 class Pokemon(models.Model):
     name = models.CharField(max_length=30, null=False)
     POKEMON_TYPES={
-        ('A', 'Agua'),
-        ('F', 'Fuego'),
-        ('T', 'Tierra'),
-        ('P', 'Planta'),
-        ('E', 'Eléctrico'),
-        ('L', 'Lagartija'),
+        ('Agua', 'Agua'),
+        ('Fuego', 'Fuego'),
+        ('Tierra', 'Tierra'),
+        ('Planta', 'Planta'),
+        ('Electrico', 'Eléctrico'),
+        ('Lagartija', 'Lagartija'),
     }
     #Choices define las opciones disponibles para el campo type. Cada elemento de esta tupla interna contiene dos partes:
     #La primera parte ('A', 'F', 'T') es el valor real que se almacenará en la base de datos cuando el usuario seleccione esa opción.

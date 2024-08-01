@@ -15,7 +15,6 @@
             <p>INICIO BARRA DE NAVEGACION</p>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Barra de navegacion Pokemon</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -27,7 +26,13 @@
                             </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url "pokedex:add_pokemon" %}"><b>Añadir Pokemon</b></a>
+                                <a class="nav-link active" href="{% url "pokedex:add_pokemon" %}"><b>Añadir Pokemon</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{% url "pokedex:add_trainer" %}"><b>Añadir Entrenador</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{% url "pokedex:trainer_list" %}"><b>Lista de Entrenadores</b></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout' %}">logout</a>

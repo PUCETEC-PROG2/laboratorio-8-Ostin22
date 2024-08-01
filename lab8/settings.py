@@ -80,8 +80,8 @@ DATABASES = {
          'NAME': 'pokedex_ricardocarrion',
          'HOST': 'localhost',
          'PORT': '5432',
-         'USER': 'postgres',
-         'PASSWORD': 'pucetec'       
+         'USER': 'richie',
+         'PASSWORD': '12345'       
      }
 }
 
